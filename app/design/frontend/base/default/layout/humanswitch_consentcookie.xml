@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+
+        <reference name="head" before="-">
+
+            <action method="addItem" ifconfig="consentcookie/settings/active">
+                <type>skin_js</type>
+                <item>consentcookie/consentcookie.min.js</item>
+            </action>
+
+            <block type="humanswitch_consentcookie/consentcookie" name="consentcookie.init" template="humanswitch/consentcookie/consentcookie.phtml" before="-" />
+
+        </reference>
+
+        <reference name="google_analytics">
+            <action method="setTemplate" ifconfig="consentcookie/settings/override_magento_ga">
+                <template>humanswitch/consentcookie/ga.phtml</template>
+            </action>
+        </reference>
+    </default>
+</layout>

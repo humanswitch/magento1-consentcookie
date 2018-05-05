@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+
+    <adminhtml_system_config_edit>
+
+        <reference name="head">
+
+            <action method="addItem" ifconfig="consentcookie/settings/active">
+                <type>skin_css</type>
+                <file>consentcookie/css/app.css</file>
+            </action>
+            <action method="addItem" ifconfig="consentcookie/settings/active">
+                <type>skin_css</type>
+                <file>consentcookie/css/override.css</file>
+            </action>
+            <action method="addItem" ifconfig="consentcookie/settings/active">
+                <type>skin_js</type>
+                <file>consentcookie/js/vue-magento-patch.js</file>
+            </action>
+            <action method="addItem" ifconfig="consentcookie/settings/active">
+                <type>skin_js</type>
+                <file>consentcookie/js/manifest.js</file>
+            </action>
+            <action method="addItem" ifconfig="consentcookie/settings/active">
+                <type>skin_js</type>
+                <file>consentcookie/js/vendor.js</file>
+            </action>
+            <action method="addItem" ifconfig="consentcookie/settings/active">
+                <type>skin_js</type>
+                <file>consentcookie/js/app.js</file>
+            </action>
+
+            <block type="core/text" name="consentcookie.jquery.cdn">
+                <action method="setText" ifconfig="consentcookie/settings/active">
+                    <text><![CDATA[<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>]]></text>
+                </action>
+            </block>
+
+        </reference>
+
+    </adminhtml_system_config_edit>
+
+</layout>

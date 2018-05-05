@@ -1,0 +1,7 @@
+/* Temporary style patch for Magento admin style conflicts with ConsentCookie Configurator */
+#consentcookie-configurator .content {
+    padding:0;
+}
+#consentcookie-configurator button, #consentcookie-configurator button:hover {
+    background:none;
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Humanswitch_Consentcookie>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+                <Mage_Adminhtml />
+                <Mage_GoogleAnalytics />
+            </depends>
+        </Humanswitch_Consentcookie>
+    </modules>
+</config>

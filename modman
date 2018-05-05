@@ -1,0 +1,25 @@
+# Humanswitch ConsentCookie for Magento 1
+
+# Module
+app/code/community/Humanswitch/Consentcookie/ app/code/community/Humanswitch/Consentcookie/
+
+# Translation
+app/locale/en_US/Humanswitch_Consentcookie.csv app/locale/en_US/Humanswitch_Consentcookie.csv
+app/locale/nl_NL/Humanswitch_Consentcookie.csv app/locale/nl_NL/Humanswitch_Consentcookie.csv
+
+# Module config
+app/etc/modules/Humanswitch_Consentcookie.xml app/etc/modules/Humanswitch_Consentcookie.xml
+
+# Adminhtml templating
+app/design/adminhtml/default/default/layout/humanswitch_consentcookie.xml app/design/adminhtml/default/default/layout/humanswitch_consentcookie.xml
+app/design/adminhtml/default/default/template/humanswitch/consentcookie/ app/design/adminhtml/default/default/template/humanswitch/consentcookie/
+
+# Frontend templating
+app/design/frontend/base/default/layout/humanswitch_consentcookie.xml app/design/frontend/base/default/layout/humanswitch_consentcookie.xml
+app/design/frontend/base/default/template/humanswitch/ app/design/frontend/base/default/template/humanswitch/
+
+# Admin resources
+skin/adminhtml/default/default/consentcookie/ skin/adminhtml/default/default/consentcookie/
+
+# Frontend
+skin/frontend/base/default/consentcookie/ skin/frontend/base/default/consentcookie/

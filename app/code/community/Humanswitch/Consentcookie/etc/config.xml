@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Humanswitch_Consentcookie>
+            <version>1.0.0</version>
+        </Humanswitch_Consentcookie>
+    </modules>
+    <global>
+        <models>
+            <humanswitch_consentcookie>
+                <class>Humanswitch_Consentcookie_Model</class>
+            </humanswitch_consentcookie>
+        </models>
+        <blocks>
+            <humanswitch_consentcookie>
+                <class>Humanswitch_Consentcookie_Block</class>
+            </humanswitch_consentcookie>
+        </blocks>
+        <helpers>
+            <humanswitch_consentcookie>
+                <class>Humanswitch_Consentcookie_Helper</class>
+            </humanswitch_consentcookie>
+        </helpers>
+    </global>
+
+    <adminhtml>
+        <translate>
+            <modules>
+                <humanswitch_consentcookie>
+                    <files>
+                        <default>Humanswitch_Consentcookie.csv</default>
+                    </files>
+                </humanswitch_consentcookie>
+            </modules>
+        </translate>
+        <layout>
+            <updates>
+                <humanswitch_consentcookie>
+                    <file>humanswitch_consentcookie.xml</file>
+                </humanswitch_consentcookie>
+            </updates>
+        </layout>
+    </adminhtml>
+
+    <frontend>
+        <layout>
+            <updates>
+                <humanswitch_consentcookie>
+                    <file>humanswitch_consentcookie.xml</file>
+                </humanswitch_consentcookie>
+            </updates>
+        </layout>
+
+    </frontend>
+    <default>
+        <consentcookie>
+            <settings>
+                <active>0</active>
+                <override_magento_ga>0</override_magento_ga>
+            </settings>
+        </consentcookie>
+    </default>
+</config>
