@@ -1,5 +1,5 @@
 {
-  "name": "humanswitch/consentcookie",
+  "name": "humanswitch/magento1-consentcookie",
   "description": "The official ConsentCookie extension for Magento1",
   "type": "magento-module",
   "homepage": "https://github.com/humanswitch/magento1-consentcookie",

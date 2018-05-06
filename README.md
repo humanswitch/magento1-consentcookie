@@ -26,7 +26,7 @@ Compatibility
 Support
 -------
 
-If you find any issues regarding this extension or would like to propose a modification or new feature, [Create an issue](#)
+If you find any issues regarding this extension or would like to propose a modification or new feature, [Create an issue](https://github.com/humanswitch/magento1-consentcookie/issues)
 
 License
 -------
