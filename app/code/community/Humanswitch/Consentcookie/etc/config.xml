@@ -54,10 +54,16 @@
     </frontend>
     <default>
         <consentcookie>
-            <settings>
+            <general>
                 <active>0</active>
+                <method>local</method>
+                <cdn_url>https://cdn.humanswitch.services/cc/consentcookie/consentcookie.min.js</cdn_url>
                 <override_magento_ga>0</override_magento_ga>
-            </settings>
+            </general>
+            <configurator_settings>
+                <active>0</active>
+                <method>local</method>
+            </configurator_settings>
         </consentcookie>
     </default>
 </config>

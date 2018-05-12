@@ -2,42 +2,19 @@
 <layout version="0.1.0">
 
     <adminhtml_system_config_edit>
-
         <reference name="head">
 
-            <action method="addItem" ifconfig="consentcookie/settings/active">
-                <type>skin_css</type>
-                <file>consentcookie/css/app.css</file>
-            </action>
-            <action method="addItem" ifconfig="consentcookie/settings/active">
-                <type>skin_css</type>
-                <file>consentcookie/css/override.css</file>
-            </action>
-            <action method="addItem" ifconfig="consentcookie/settings/active">
-                <type>skin_js</type>
-                <file>consentcookie/js/vue-magento-patch.js</file>
-            </action>
-            <action method="addItem" ifconfig="consentcookie/settings/active">
-                <type>skin_js</type>
-                <file>consentcookie/js/manifest.js</file>
-            </action>
-            <action method="addItem" ifconfig="consentcookie/settings/active">
-                <type>skin_js</type>
-                <file>consentcookie/js/vendor.js</file>
-            </action>
-            <action method="addItem" ifconfig="consentcookie/settings/active">
-                <type>skin_js</type>
-                <file>consentcookie/js/app.js</file>
-            </action>
+            <!-- Load configurator from local assets -->
+            <block type="humanswitch_consentcookie/adminhtml_source" name="cc.configurator.js" />
 
-            <block type="core/text" name="consentcookie.jquery.cdn">
-                <action method="setText" ifconfig="consentcookie/settings/active">
-                    <text><![CDATA[<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>]]></text>
+            <!-- Load configurator over CDN -->
+            <block type="core/text" name="cc.configurator.cdn" output="toHtml">
+                <action method="setText">
+                    <text helper="humanswitch_consentcookie/data/loadConfiguratorByCDN"/>
                 </action>
             </block>
 
         </reference>
-
     </adminhtml_system_config_edit>
 
 </layout>

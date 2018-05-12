@@ -22,8 +22,8 @@
             if (typeof CCC !== "undefined") {
                 var CCConfigurator = new CCC('#ccc-container');
 
-                <?php if($this->validateJson()): ?>
-                CCConfigurator.setConfig(<?php echo $this->getConfiguration() ?>);
+                <?php if($configuration = $this->getConsentCookieConfiguration()): ?>
+                CCConfigurator.setConfig(<?php echo $configuration ?>);
                 <?php endif; ?>
 
                 CCConfigurator.setOptions({
@@ -32,7 +32,7 @@
                 });
 
                 CCConfigurator.onChange(function(configurator, config) {
-                    document.getElementById('consentcookie_settings_configuration').value = JSON
+                    document.getElementById('consentcookie_configurator_settings_configuration').value = JSON
                         .stringify(config, null, 2);
 
                 }).mount();

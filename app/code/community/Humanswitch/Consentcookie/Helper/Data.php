@@ -14,6 +14,7 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
+
 /**
  * Class Humanswitch_Consentcookie_Helper_Data
  */
@@ -21,65 +22,134 @@ class Humanswitch_Consentcookie_Helper_Data extends Mage_Core_Helper_Abstract
 {
 
     /**
-     * ConsentCookie system config setting base path
+     * ConsentCookie general settings path
      */
-    CONST CONFIG_CC = 'consentcookie/settings';
+    CONST CONFIG_GENERAL = 'consentcookie/general';
 
     /**
-     * Get settings from system configuration
+     * ConsentCookie configurator settings path
+     */
+    CONST CONFIG_CONFIGURATOR = 'consentcookie/configurator_settings';
+
+    /**
+     * @var array The required configurator CDN assets
+     */
+    CONST CONFIGURATOR_CDN_ASSETS = [
+        [
+            'type' => 'style',
+            'url' => 'https://www.consentcookie.nl/configurator/static/css/app.css'
+        ],
+        [
+            'type' => 'script',
+            'url' => 'https://www.consentcookie.nl/configurator/static/js/manifest.js'
+        ],
+        [
+            'type' => 'script',
+            'url' => 'https://www.consentcookie.nl/configurator/static/js/vendor.js'
+        ],
+        [
+            'type' => 'script',
+            'url' => 'https://www.consentcookie.nl/configurator/static/js/app.js'
+        ]
+    ];
+
+    /**
+     * Gets a plugin configurations
      *
-     * @param bool $field
-     * @param null $id
+     * @param $field
+     * @param string $area
+     * @param null $storeId
      * @return mixed
      * @throws Mage_Core_Model_Store_Exception
      */
-    public function getSettings($field = false, $id = null)
+    public function getConfiguration($field, $area = self::CONFIG_GENERAL, $storeId = null)
     {
-        return Mage::getStoreConfig(self::CONFIG_CC . ($field ? '/' . $field : ''), Mage::app()->getStore($id));
+        return Mage::getStoreConfig($area . ($field ? '/' . $field : ''), Mage::app()->getStore($storeId));
     }
 
     /**
      * Get active state from system configuration
      *
+     * @param string $area
+     * @param null $storeId
      * @return mixed
      */
-    public function isActive()
+    public function isActive($area = self::CONFIG_GENERAL, $storeId = null)
     {
-        return $this->getSettings('active');
+        return $this->getConfiguration('active', $area, $storeId);
     }
 
     /**
      * Get CC configuration from system configuration
      *
+     * @param bool $validateJson
+     * @param null $storeId
      * @return mixed
      */
-    public function getConfiguration()
+    public function getConsentCookieConfiguration($validateJson = true, $storeId = null)
     {
-        return $this->getSettings('configuration');
+        $configuration = $this->getConfiguration('configuration', self::CONFIG_CONFIGURATOR, $storeId);
+
+        if ($validateJson && !$this->validateConsentCookieConfiguration($configuration)) {
+            return false;
+        }
+
+        return $configuration;
     }
 
     /**
-     * Validates whether the configuration is proper JSON.
-     *
-     * @todo validate against JSON schema
+     * Validates the JSON format.
      *
      * @param null $configuration
-     * @return bool
+     * @return bool|mixed|null
      */
-    public function validateJSONConfiguration($configuration = null)
+    public function validateConsentCookieConfiguration($configuration = null)
     {
         if ($configuration === null) {
-            $configuration = $this->getConfiguration();
+            $configuration = $this->getConsentCookieConfiguration(false);
         }
 
-        if ($configuration) {
-            json_decode($this->getConfiguration());
-            if (json_last_error() === JSON_ERROR_NONE) {
-                return true;
-            }
-            Mage::log('The ConsentCookie JSON configuration is invalid.');
+        json_decode($configuration);
+        if (json_last_error() === JSON_ERROR_NONE) {
+            return $configuration;
         }
+
+        Mage::log('The ConsentCookie configuration in JSON format is invalid.');
         return false;
+    }
+
+    /**
+     * Loads ConsentCookie by CDN.
+     *
+     * @return string
+     */
+    public function loadCCByCDN()
+    {
+        if ($this->getConfiguration('method') === 'cdn') {
+            return sprintf('<script type="text/javascript" src="%s"></script>', $this->getConfiguration('cdn_url'));
+        }
+        return null;
+    }
+
+    /**
+     * Loads configurator assets by CDN.
+     *
+     * @return string
+     */
+    public function loadConfiguratorByCDN()
+    {
+        if ($this->isActive(self::CONFIG_CONFIGURATOR) && $this->getConfiguration('method', self::CONFIG_CONFIGURATOR) === 'cdn') {
+            $text = '';
+            foreach (self::CONFIGURATOR_CDN_ASSETS as $asset) {
+                if ($asset['type'] === 'style') {
+                    $text .= sprintf('<link href="%s" rel="stylesheet">' . PHP_EOL, $asset['url']);
+                } else {
+                    $text .= sprintf('<script src="%s" type="text/javascript"></script>' . PHP_EOL, $asset['url']);
+                }
+            }
+            return $text;
+        }
+        return null;
     }
 
 }

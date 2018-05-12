@@ -40,30 +40,19 @@ class Humanswitch_Consentcookie_Block_Adminhtml_System_Config_Configurator exten
      * Checks whether consentcookie was activated in the system configuration.
      *
      * @return bool
+     * @throws Varien_Exception
      */
     public function isEnabled()
     {
-        return $this->helper('humanswitch_consentcookie')->isActive();
+        return $this->helper('humanswitch_consentcookie')->isActive(Humanswitch_Consentcookie_Helper_Data::CONFIG_CONFIGURATOR);
     }
 
     /**
-     * Gets the JSON configuration.
-     *
      * @return mixed
+     * @throws Varien_Exception
      */
-    public function getConfiguration()
+    public function getConsentCookieConfiguration()
     {
-        return $this->helper('humanswitch_consentcookie')->getConfiguration();
-    }
-
-    /**
-     * Validates the format of the configuration in JSON.
-     *
-     * @param null $configuration
-     * @return bool
-     */
-    public function validateJson($configuration = null)
-    {
-        return $this->helper('humanswitch_consentcookie')->validateJSONConfiguration($configuration);
+        return $this->helper('humanswitch_consentcookie')->getConsentCookieConfiguration();
     }
 }

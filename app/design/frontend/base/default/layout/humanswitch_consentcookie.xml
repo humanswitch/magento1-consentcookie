@@ -4,17 +4,24 @@
 
         <reference name="head" before="-">
 
-            <action method="addItem" ifconfig="consentcookie/settings/active">
-                <type>skin_js</type>
-                <item>consentcookie/consentcookie.min.js</item>
-            </action>
+            <!-- load consentcookie from local assets -->
+            <block type="humanswitch_consentcookie/source" name="consentcookie.js" />
 
+            <!-- Load consentcookie over CDN -->
+            <block type="core/text" name="consentcookie.cdn">
+                <action method="setText">
+                    <text helper="humanswitch_consentcookie/data/loadCCByCDN" />
+                </action>
+            </block>
+
+            <!-- Initialise ConsentCookie -->
             <block type="humanswitch_consentcookie/consentcookie" name="consentcookie.init" template="humanswitch/consentcookie/consentcookie.phtml" before="-" />
 
         </reference>
 
+        <!-- Override Magento GA template -->
         <reference name="google_analytics">
-            <action method="setTemplate" ifconfig="consentcookie/settings/override_magento_ga">
+            <action method="setTemplate" ifconfig="consentcookie/general/override_magento_ga">
                 <template>humanswitch/consentcookie/ga.phtml</template>
             </action>
         </reference>

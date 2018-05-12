@@ -14,24 +14,20 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-?>
-<?php if ($this->isEnabled() && $configuration = $this->getConsentCookieConfiguration()): ?>
-    <script type="text/javascript">
-        document.addEventListener("DOMContentLoaded", function (event) {
-            if (typeof ConsentCookie !== "undefined") {
-                window.ConsentCookie.init(<?php echo $configuration ?>);
 
-                var CCInitEvent = new CustomEvent('CCInit', {
-                    detail: {
-                        ConsentCookie: ConsentCookie
-                    }
-                });
+/**
+ * Class Humanswitch_Consentcookie_Model_System_Config_Source_Sources
+ */
+class Humanswitch_Consentcookie_Model_System_Config_Source_Sources extends Mage_Core_Model_Abstract {
 
-                window.dispatchEvent(CCInitEvent);
-            }
-        });
-    </script>
-<?php endif; ?>
-
-
-
+    /**
+     * @return array
+     */
+    public function toOptionArray()
+    {
+        return array(
+            array('value' => 'local', 'label' => Mage::helper('humanswitch_consentcookie')->__('Local')),
+            array('value' => 'cdn', 'label' => Mage::helper('humanswitch_consentcookie')->__('CDN')),
+        );
+    }
+}

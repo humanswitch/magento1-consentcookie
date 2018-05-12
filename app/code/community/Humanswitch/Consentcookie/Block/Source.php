@@ -16,34 +16,26 @@
  */
 
 /**
- * Class Humanswitch_Consentcookie_Block_Consentcookie
+ * Class Humanswitch_Consentcookie_Block_Source
  */
-class Humanswitch_Consentcookie_Block_Consentcookie extends Mage_Core_Block_Template
-{
-
-    protected function _construct()
-    {
-        $this->setCacheLifetime(86400);
-    }
+class Humanswitch_Consentcookie_Block_Source extends Mage_Core_Block_Template {
 
     /**
-     * Checks whether consentcookie was activated in the system configuration.
-     *
-     * @return bool
+     * @return $this|Mage_Core_Block_Abstract
      * @throws Varien_Exception
      */
-    public function isEnabled()
-    {
-        return $this->helper('humanswitch_consentcookie')->isActive();
-    }
+    protected function _prepareLayout(){
 
-    /**
-     * @return mixed
-     * @throws Varien_Exception
-     */
-    public function getConsentCookieConfiguration()
-    {
-        return $this->helper('humanswitch_consentcookie')->getConsentCookieConfiguration();
-    }
+        parent::_prepareLayout();
 
+        /** @var Humanswitch_Consentcookie_Helper_Data $helper */
+        $helper = $this->helper('humanswitch_consentcookie');
+
+        if($helper->isActive() && $helper->getConfiguration('method') === 'local'){
+
+            $this->getLayout()->getBlock('head')->addItem('skin_js','consentcookie/consentcookie.min.js');
+        }
+
+        return $this;
+    }
 }
