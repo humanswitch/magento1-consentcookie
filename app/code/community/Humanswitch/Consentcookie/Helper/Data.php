@@ -54,7 +54,7 @@ class Humanswitch_Consentcookie_Helper_Data extends Mage_Core_Helper_Abstract
     ];
 
     /**
-     * Gets a plugin configurations
+     * Get extension configurations
      *
      * @param $field
      * @param string $area
